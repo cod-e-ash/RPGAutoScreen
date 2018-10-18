@@ -14,33 +14,77 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You need to have AS400 Machine access (duh!)
+You need to have AS400 Machine access (duh!)  
 Create a RPGUtils library to store the files.
 ```
 CRTLIB RPGUTILS
 ```
 
+### Program and Object Descriptions  
+  
+  **AUTOSCRAF.pf**  
+  This is a PF source which will hold the data to generate programs and screens. 
+  Create four files based on this source AUTOSCRAF1, AUTOSCRAF2, AUTOSCRAF3, AUTOSCRAF4
+
+  **AUTOSCRAF1/2/3/4.pfd**  
+  This contain the data to be inserted into source files created before. (Use name as reference)
+
+  **AUTOSCRC.cl**  
+  This is a dirver CL program. 
+
+  **AUTOSCRC.cd**  
+  Command file. Use this source to create the command, use any name, but make sure you are calling the above CL as program.
+
+  **AUTOSCRP.rpg**  
+  Main program that contains all the logic. 
+
+  **CPYBK.cpb**  
+  A copybook to store prototype definations and other. If you use any other library that RPGUTILS, please change the path in above RPG program for this copy book.
+
+
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+**Step 1.**
+Upload all files to AS400 server, use ftp.
 ```
-Give the example
+  open pub400.com
+  username
+  password
+  cd /qsys.lib	
+  cd RPGUTILS.LIB 				
+  cd 	iCORESRC.FILE
+  mput *.rpg
+  disconnect
+  quit
 ```
-
-And repeat
-
+**Step 2.**
+Compile Objects according to their extensions and change the atribute type accordingly once uploaded.
+Below are the file extensions as per their format:  
 ```
-until finished
+  .rpg  -> RPGLE/SQLRPGLE (RPG Program)  
+  .cl   -> CLLE (CL Program)  
+  .cd   -> CMD (Command File)  (Use the command source, but name the command at your choice)
+  .pf   -> PF (PF Source)  (Create 4 files based on this pf, AUTOSCRAF1, AUTOSCRAF2, AUTOSCRAF3, AUTOSCRAF4
+  .dspf -> DSPF (Display File)  
+  
+  (leave these, should not be compiled)
+  .cpb  -> CPY (Copybook)  
+  .pfd  -> PF Data (Data to be added to given file)  
 ```
+**Step 3.** 
+Copy the data from the .pfd files to AUTOSCRAF1, AUTOSCRAF2, AUTOSCRAF3 and AUTOSCRAF4
 
-End with an example of getting some data out of the system or using it for a little demo
+**Step 4.**
+Use below steps to test.
+
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+Your library needs to be added to library list. Use below code.
+```
+  ADDLIBLE RPGUTILS
+ ```
+ 
 
 ### Break down into end to end tests
 
