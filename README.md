@@ -4,9 +4,9 @@ This is part of my RPG Utils series to help overcome some of the day-to-day acti
 During my previous assignments with various companies, I found that there are many static files thats get created during any project.
 Initial data is added via SQL or any other method. But the problem arises when we have to modify the data. Now, usually the static files are not maintained by the developer, but by any other team. Now options to them are either SQL or UPDDTA or any other third party tool which in many cases, are error prone.
 
-Imagine you are have a static file with 20, 40, 60 fields. Now developing program for maintainance of this file would take much of your project work time
+Imagine you are have a static file with 20, 40, 60 fields. Now developing program for maintainance of this file would take much of your project work time. That is not how we (coders) do the things.
 
-Hence I have come up with a utility that can generate subfiles, programs and all the logic behind the scene, only by giving the file name. Isn't that awesome. 
+So i present to you a utility that can generate subfiles, programs and all the logic behind the scene withing few mins. Isn't that awesome. 
 
 ## Getting Started
 
@@ -14,10 +14,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
+You need to have AS400 Machine access (duh!)
+Create a RPGUtils library to store the files.
 ```
-Give examples
+CRTLIB RPGUTILS
 ```
 
 ### Installing
@@ -62,30 +62,17 @@ Give an example
 
 Add additional notes about how to deploy this on a live system
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+Ashish Bagaddeo
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the Apache License v2.0 - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
