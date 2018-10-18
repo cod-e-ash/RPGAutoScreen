@@ -43,23 +43,6 @@
                           OUTFILE(QTEMP/FLDREFF) OUTMBR(*FIRST +                                            
                           *REPLACE)                                                                         
                                                                                                             
- /*‚Delete Objects */                                                                                       
- /*          DLTOBJ     OBJ(&LIB/AUTOTMPP) OBJTYPE(*PGM) +           */                                     
- /*                       RMVMSG(*YES)                               */                                     
- /*          MONMSG     MSGID(CPF2105 CPF2114)                       */                                     
- /*                                                                  */                                     
- /*          DLTOBJ     OBJ(&LIB/AUTOSPGP) OBJTYPE(*PGM) +           */                                     
- /*                       RMVMSG(*YES)                               */                                     
- /*          MONMSG     MSGID(CPF2105 CPF2114)                       */                                     
- /*                                                                  */                                     
- /*          DLTOBJ     OBJ(&LIB/AUTOTMPD) OBJTYPE(*FILE) +          */                                     
- /*                       RMVMSG(*YES)                               */                                     
- /*          MONMSG     MSGID(CPF2105 CPF2114)                       */                                     
- /*                                                                  */                                     
- /*          DLTOBJ     OBJ(&LIB/AUTOSUBD) OBJTYPE(*FILE) +          */                                     
- /*                       RMVMSG(*YES)                               */                                     
- /*          MONMSG     MSGID(CPF2105 CPF2114)                       */                                     
-                                                                                                            
  /*‚Process */                                                                                              
              CHGVAR     VAR(&MBRNM) VALUE(&PGMPRFX *TCAT 'MD')                                              
              CLRPFM     FILE(&LIB/AUTOSCRF) MBR(&MBRNM)                                                     

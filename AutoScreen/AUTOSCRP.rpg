@@ -151,7 +151,7 @@
      DSFldTo                          9  0                                                                  
                                                                                                             
      ‚* Prototypes                                                                                          
-      /Copy AB,CMDCPYBK                                                                                     
+      /Copy RPGUTILS,CPYBK                                                                                     
                                                                                                             
      D AUTOSCRP        PR                  EXTPGM('AUTOSCRP')                                               
      D inPgmPrfx                      8                                                                     
@@ -438,26 +438,7 @@
                     Else;                                                                                   
                       %SubSt(wLineData:38:1) = 'O';                                                         
                     EndIf;                                                                                  
-                                                                                                            
-                 //‚Set Length                                                                              
-                 // If wFldTyp <> 'Z' And wFldTyp <> 'L';                                                   
-                 //   If %Int(FldOptDS(wCurFldCnt ).FLDLEN) > 99;                                           
-                 //     %SubSt(wLineData:32:3) =                                                            
-                 //                        %Trim(FldOptDS(wCurFldCnt ).FLDLEN);                             
-                 //   ElseIf %Int(FldOptDS(wCurFldCnt ).FLDLEN) > 9;                                        
-                 //     %SubSt(wLineData:33:2) =                                                            
-                 //                        %Trim(FldOptDS(wCurFldCnt ).FLDLEN);                             
-                 //   Else;                                                                                 
-                 //     %SubSt(wLineData:34:1) =                                                            
-                 //                        %Trim(FldOptDS(wCurFldCnt ).FLDLEN);                             
-                 //   EndIf;                                                                                
-                 // EndIf;                                                                                  
-                                                                                                            
-                 //‚Set Decimal Position if Numeric                                                         
-                 // %SubSt(wLineData:36:2) = wDecLen;                                                       
-                                                                                                            
-                 //‚Set Veritical Position                                                                  
-                 //‚Handle if Field > 20 chars                                                              
+                                                                                                                                                                         
                     If %Int(FldOptDS(wCurFldCnt ).FLDLEN) > 20 Or                                           
                       (%Int(FldOptDS(wCurFldCnt ).FLDLEN) > 18 And                                          
                        wFldTyp = 'Y');                                                                      
@@ -1004,34 +985,8 @@
                //‚Set Field Name                                                                            
                   %SubSt(wLineData:19:10) = FldOptDS(wCurFldCnt ).FLDNAM;                                   
                                                                                                             
-               //‚Set Field Type (Text or Numeric)                                                          
-               // %SubSt(wLineData:35:1) = wFldTyp;                                                         
-                                                                                                            
                //‚Set Output Type (O)                                                                       
                   %SubSt(wLineData:38:1) = 'O';                                                             
-                                                                                                            
-               //‚Set Length                                                                                
-               // If wFldTyp <> 'Z' And wFldTyp <> 'L';                                                     
-               //                                                                                           
-               //   If %Int(FldOptDS(wCurFldCnt ).FLDLEN) > 99;                                             
-               //     %SubSt(wLineData:32:3) =                                                              
-               //                        %Trim(FldOptDS(wCurFldCnt ).FLDLEN);                               
-               //   ElseIf %Int(FldOptDS(wCurFldCnt ).FLDLEN) > 9;                                          
-               //     %SubSt(wLineData:33:2) =                                                              
-               //                        %Trim(FldOptDS(wCurFldCnt ).FLDLEN);                               
-               //   Else;                                                                                   
-               //     %SubSt(wLineData:34:1) =                                                              
-               //                        %Trim(FldOptDS(wCurFldCnt ).FLDLEN);                               
-               //   EndIf;                                                                                  
-               //                                                                                           
-               // Else;                                                                                     
-               //                                                                                           
-               //     %SubSt(wLineData:33:2) = *Blanks;                                                     
-               //                                                                                           
-               // EndIf;                                                                                    
-                                                                                                            
-               //‚Set Decimal Position if Numeric                                                           
-               // %SubSt(wLineData:36:2) = wDecLen;                                                         
                                                                                                             
                //‚Set Veritical Position                                                                    
                   %SubSt(wLineData:40:2) = '10';                                                            
@@ -1123,26 +1078,7 @@
            //‚Check if to be included in SubFile                                                            
               DoW FldOptDS(wCurFldCnt ).FLDNAM <> *Blanks;                                                  
                                                                                                             
-                If FldOptDS(wCurFldCnt ).FLDSUB = 'Y';                                                      
-                                                                                                            
-               //‚Set Position if First Field                                                               
-               // If wPosDone  = *Off;                                                                      
-               //   wPosDone  = *On;                                                                        
-               //   wAEScr = '107POSA';                                                                     
-               //   Chain(E) (wAEScr:61) AUTOSCRAF3;                                                        
-               //   wLineData = *Blanks;                                                                    
-               //   wLineData = AUTOLINE;                                                                   
-                                                                                                            
-                 //‚Set Length                                                                              
-               //   If %Int(FldOptDS(wCurFldCnt ).FLDLEN) > 9;                                              
-               //     %SubSt(wLineData:33:2) =                                                              
-               //                        %Trim(FldOptDS(wCurFldCnt ).FLDLEN);                               
-               //   Else;                                                                                   
-               //     %SubSt(wLineData:34:1) =                                                              
-               //                        %Trim(FldOptDS(wCurFldCnt ).FLDLEN);                               
-               //   EndIf;                                                                                  
-                                                                                                            
-               // EndIf;                                                                                    
+                If FldOptDS(wCurFldCnt ).FLDSUB = 'Y';                                                     
                                                                                                             
                   wAEScr = '108DATA';                                                                       
                   Chain(E) (wAEScr:65) AUTOSCRAF3;                                                          
@@ -1398,27 +1334,6 @@
                                                                                                             
            //‚Set Subfile Fields                                                                            
               wCurFldCnt    = 1;                                                                            
-                                                                                                            
-           //‚Check if to be included in SubFile                                                            
-           // DoW FldOptDS(wCurFldCnt ).FLDNAM <> *Blanks;                                                  
-           //                                                                                               
-           //   If FldOptDS(wCurFldCnt ).FLDSUB = 'Y';                                                      
-           //     wAEScr = '111PFLD';                                                                       
-           //     Chain(E) wAEScr AUTOSCRAF4;                                                               
-           //     If %Found(AUTOSCRAF4);                                                                    
-           //       wLineData = *Blanks;                                                                    
-           //       wLineData = AUTOLINE;                                                                   
-           //       %SubSt(wLineData:33:10) = FldOptDS(wCurFldCnt ).FLDNAM;                                 
-           //       ExSr $AddLineToFile;                                                                    
-           //     EndIf;                                                                                    
-           //                                                                                               
-           //     Leave;                                                                                    
-           //                                                                                               
-           //   EndIf;                                                                                      
-           //                                                                                               
-           //   wCurFldCnt  += 1;                                                                           
-           //                                                                                               
-           // EndDo;                                                                                        
                                                                                                             
            //‚Set Position Data                                                                             
               For i = 1 To wkPOSUPSCnt;                                                                     
