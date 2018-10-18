@@ -1,0 +1,21 @@
+     ‚* Project      : AB Utilities                                         *                               
+     ‚* Programmer   : Ashish Bagaddeo                                      *                               
+     ‚* Date         : 01/01/2015                                           *                               
+     ‚* Description  : Auto Screen - Add/Edit File                          *                               
+     ‚*                                                                     *                               
+     ‚* × Copyright  : iCORE®              mailto: support@icore.co.in      *                               
+     ‚*---------------------------------------------------------------------*                               
+A               R AUTOTSTR                                                                                  
+A                 ATXTFLD       10          COLHDG('TEXT FLD  ')                                            
+A                 ALRGTXT      999          COLHDG('LARGE TEXT')                                            
+A                 ADECPCK       15P 0       COLHDG('PACKED    ')                                            
+A                 ADECZON       15S 0       COLHDG('ZONED     ')                                            
+A                 ADECFLT        8F 2       COLHDG('FLOAT     ')                                            
+A                 ADATFLD         L         COLHDG('DATE      ')                                            
+A                 ATIMFLD         T         COLHDG('TIME      ')                                            
+A                 ATIMSTM         Z         COLHDG('TIMESTAMP ')                                            
+A                 ATXTFLD2      10          COLHDG('TEXT FLD 2')                                            
+A                 ATXTFLD3      30          COLHDG('TEXT FLD 3')                                            
+      **          AVARLEN       50A         VARLEN(20)                                                      
+      **                                    COLHDG('VARLEN    ')                                            
+ /*‚*************************************************************************/                              

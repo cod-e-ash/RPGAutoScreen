@@ -1,0 +1,145 @@
+ /*‚Project        : AB utilities                                           */                              
+ /*‚Programmer     : Ashish Bagaddeo                                        */                              
+ /*‚Date           :                                                        */                              
+ /*‚Description    : Auto Screen Generator                                  */                              
+ /*‚Parameter      :                                                        */                              
+ /*‚Copyright      : iCORE®                   mailto: support@icore.co.in   */                              
+ /*‚*************************************************************************/                              
+             PGM        PARM(&PGMPRFX &LIB)                                                                 
+                                                                                                            
+             DCL        VAR(&PGMPRFX)  TYPE(*CHAR) LEN(8)                                                   
+             DCL        VAR(&LIB)      TYPE(*CHAR) LEN(10)                                                  
+             DCL        VAR(&USRPRF)   TYPE(*CHAR) LEN(10)                                                  
+             DCL        VAR(&MBRNM)    TYPE(*CHAR) LEN(10)                                                  
+                                                                                                            
+             COPYRIGHT  TEXT('iCORE® - Ashish Bagaddeo')                                                    
+                                                                                                            
+ /*‚Check Program Prefix */                                                                                 
+             IF         COND(&PGMPRFX *EQ ' ') THEN(DO)                                                     
+             SNDPGMMSG  MSG('Please enter Prefix for Program!!!')                                           
+             GOTO       CMDLBL(EXIT)                                                                        
+             ENDDO                                                                                          
+                                                                                                            
+ /*‚Get Library */                                                                                          
+             IF         COND(&LIB *EQ ' ') THEN(DO)                                                         
+             RTVUSRPRF  RTNUSRPRF(&USRPRF)                                                                  
+             CHGVAR     VAR(&LIB) VALUE(%SST(&USRPRF 4 7))                                                  
+             ENDDO                                                                                          
+                                                                                                            
+             ADDLIBLE   LIB(&LIB)                                                                           
+             MONMSG     MSGID(CPF2103 CPF2110 CPF2118)                                                      
+             MONMSG     MSGID(CPF9810) EXEC(DO)                                                             
+             SNDPGMMSG  MSG('Library not found!!!')                                                         
+             GOTO       CMDLBL(EXIT)                                                                        
+             ENDDO                                                                                          
+                                                                                                            
+             CHKOBJ     OBJ(&LIB/AUTOSCRF) OBJTYPE(*FILE)                                                   
+             MONMSG     MSGID(CPF9801) EXEC(DO)                                                             
+             CRTSRCPF   FILE(&LIB/AUTOSCRF) TEXT('Auto Screen Source +                                      
+                          File')                                                                            
+             ENDDO                                                                                          
+                                                                                                            
+             DSPFFD     FILE(ASHISHTOOLS/AUTOSCRAF1) OUTPUT(*OUTFILE) +                                       
+                          OUTFILE(QTEMP/FLDREFF) OUTMBR(*FIRST +                                            
+                          *REPLACE)                                                                         
+                                                                                                            
+ /*‚Delete Objects */                                                                                       
+ /*          DLTOBJ     OBJ(&LIB/AUTOTMPP) OBJTYPE(*PGM) +           */                                     
+ /*                       RMVMSG(*YES)                               */                                     
+ /*          MONMSG     MSGID(CPF2105 CPF2114)                       */                                     
+ /*                                                                  */                                     
+ /*          DLTOBJ     OBJ(&LIB/AUTOSPGP) OBJTYPE(*PGM) +           */                                     
+ /*                       RMVMSG(*YES)                               */                                     
+ /*          MONMSG     MSGID(CPF2105 CPF2114)                       */                                     
+ /*                                                                  */                                     
+ /*          DLTOBJ     OBJ(&LIB/AUTOTMPD) OBJTYPE(*FILE) +          */                                     
+ /*                       RMVMSG(*YES)                               */                                     
+ /*          MONMSG     MSGID(CPF2105 CPF2114)                       */                                     
+ /*                                                                  */                                     
+ /*          DLTOBJ     OBJ(&LIB/AUTOSUBD) OBJTYPE(*FILE) +          */                                     
+ /*                       RMVMSG(*YES)                               */                                     
+ /*          MONMSG     MSGID(CPF2105 CPF2114)                       */                                     
+                                                                                                            
+ /*‚Process */                                                                                              
+             CHGVAR     VAR(&MBRNM) VALUE(&PGMPRFX *TCAT 'MD')                                              
+             CLRPFM     FILE(&LIB/AUTOSCRF) MBR(&MBRNM)                                                     
+             MONMSG     MSGID(CPF3141) EXEC(ADDPFM +                                                        
+                          FILE(&LIB/AUTOSCRF) MBR(&MBRNM) +                                                 
+                          TEXT('Auto Screen Main Display') +                                                
+                          SRCTYPE(DSPF))                                                                    
+             MONMSG     MSGID(CPF0000)                                                                      
+             OVRDBF     FILE(AUTOSCRF) TOFILE(&LIB/AUTOSCRF) +                                              
+                          MBR(&MBRNM) OVRSCOPE(*CALLLVL)                                                    
+                                                                                                            
+             CHGVAR     VAR(&MBRNM) VALUE(&PGMPRFX *TCAT 'MP')                                              
+             CLRPFM     FILE(&LIB/AUTOSCRF) MBR(&MBRNM)                                                     
+             MONMSG     MSGID(CPF3141) EXEC(ADDPFM +                                                        
+                          FILE(&LIB/AUTOSCRF) MBR(&MBRNM) +                                                 
+                          TEXT('Auto Screen Main Program') +                                                
+                          SRCTYPE(SQLRPGLE))                                                                
+             MONMSG     MSGID(CPF0000)                                                                      
+             OVRDBF     FILE(AUTOPGMF) TOFILE(&LIB/AUTOSCRF) +                                              
+                          MBR(&MBRNM) OVRSCOPE(*CALLLVL)                                                    
+                                                                                                            
+             CHGVAR     VAR(&MBRNM) VALUE(&PGMPRFX *TCAT 'SD')                                              
+             CLRPFM     FILE(&LIB/AUTOSCRF) MBR(&MBRNM)                                                     
+             MONMSG     MSGID(CPF3141) EXEC(ADDPFM +                                                        
+                          FILE(&LIB/AUTOSCRF) MBR(&MBRNM)   +                                               
+                          TEXT('Auto Screen SubFile Display') +                                             
+                          SRCTYPE(DSPF))                                                                    
+             MONMSG     MSGID(CPF0000)                                                                      
+             OVRDBF     FILE(AUTOSUBF) TOFILE(&LIB/AUTOSCRF) +                                              
+                          MBR(&MBRNM) OVRSCOPE(*CALLLVL)                                                    
+                                                                                                            
+             CHGVAR     VAR(&MBRNM) VALUE(&PGMPRFX *TCAT 'SP')                                              
+             CLRPFM     FILE(&LIB/AUTOSCRF) MBR(&MBRNM)                                                     
+             MONMSG     MSGID(CPF3141) EXEC(ADDPFM +                                                        
+                          FILE(&LIB/AUTOSCRF) MBR(&MBRNM) +                                                 
+                          TEXT('Auto Screen SubFile Display') +                                             
+                          SRCTYPE(SQLRPGLE))                                                                
+             MONMSG     MSGID(CPF0000)                                                                      
+             OVRDBF     FILE(AUTOSPGF) TOFILE(&LIB/AUTOSCRF) +                                              
+                          MBR(&MBRNM) OVRSCOPE(*CALLLVL)                                                    
+                                                                                                            
+             OVRDBF     FILE(FLDREFF) TOFILE(QTEMP/FLDREFF) +                                               
+                          OVRSCOPE(*CALLLVL)                                                                
+                                                                                                            
+             CALL       PGM(AUTOSCRP) PARM(&PGMPRFX '0')                                                    
+                                                                                                            
+DEALLOC:                                                                                                    
+             DLTOVR     FILE(*ALL)                                                                          
+                                                                                                            
+COMPILE:                                                                                                    
+             CHGVAR     VAR(&MBRNM) VALUE(&PGMPRFX *TCAT 'SD')                                              
+             CRTDSPF    FILE(&LIB/&MBRNM) +                                                                 
+                          SRCFILE(&LIB/AUTOSCRF) +                                                          
+                          SRCMBR(&MBRNM) REPLACE(*YES)                                                      
+             MONMSG     MSGID(CPF0000)                                                                      
+                                                                                                            
+             CHGVAR     VAR(&MBRNM) VALUE(&PGMPRFX *TCAT 'MD')                                              
+             CRTDSPF    FILE(&LIB/&MBRNM) +                                                                 
+                          SRCFILE(&LIB/AUTOSCRF) +                                                          
+                          SRCMBR(&MBRNM) REPLACE(*YES)                                                      
+             MONMSG     MSGID(CPF0000)                                                                      
+                                                                                                            
+             CHGVAR     VAR(&MBRNM) VALUE(&PGMPRFX *TCAT 'SP')                                              
+             CRTSQLRPGI OBJ(&LIB/&MBRNM) SRCFILE(&LIB/AUTOSCRF) +                                           
+                          SRCMBR(&MBRNM) OBJTYPE(*PGM) +                                                    
+                          CLOSQLCSR(*ENDMOD) REPLACE(*YES)                                                  
+             MONMSG     MSGID(CPF0000)                                                                      
+                                                                                                            
+             CHGVAR     VAR(&MBRNM) VALUE(&PGMPRFX *TCAT 'MP')                                              
+             CRTSQLRPGI OBJ(&LIB/&MBRNM) SRCFILE(&LIB/AUTOSCRF) +                                           
+                          SRCMBR(&MBRNM) OBJTYPE(*PGM) +                                                    
+                          CLOSQLCSR(*ENDMOD) REPLACE(*YES)                                                  
+             MONMSG     MSGID(CPF0000)                                                                      
+                                                                                                            
+ USRMSG:                                                                                                    
+             SNDPGMMSG  MSG('Auto Screen/Program Creation Complete!!!')                                     
+                                                                                                            
+ /*‚End Process */                                                                                          
+ EXIT:                                                                                                      
+             DLTOVR     FILE(*ALL)                                                                          
+             RCLRSC                                                                                         
+             ENDPGM                                                                                         
+/*--------------------------------------------------------------------------*/                              

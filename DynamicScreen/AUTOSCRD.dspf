@@ -1,0 +1,157 @@
+     A* PROJECT      : AB UTILITIES                                         *                               
+     A* PROGRAMMER   : ASHISH BAGADDEO                                      *                               
+     A* DATE         : 00/00/0000                                           *                               
+     A* DESCRIPTION  : AUTO SCREEN GENERATOR                                *                               
+     A* × COPYRIGHT  : ICORE®                 MAILTO: SUPPORT@ICORE.CO.IN   *                               
+     A*---------------------------------------------------------------------*                               
+     A                                      DSPSIZ(24 80 *DS3)                                              
+     A                                      CA03(03)                                                        
+     A                                      CA05(05)                                                        
+     A                                      CA12(12)                                                        
+     A                                      CA18(18)                                                        
+     ‚*---------------------------------------------------------------------*                               
+     A          R HEADER                                                                                    
+     ‚*---------------------------------------------------------------------*                               
+     A                                  2  2USER                                                            
+     A                                  2 29'AUTO SCREEN GENERATOR'                                         
+     A                                      COLOR(WHT)                                                      
+     A                                  2 72DATE                                                            
+     A                                      EDTCDE(Y)                                                       
+                                                                                                            
+     A                                  3 72TIME                                                            
+     A  22                              5  2'  FILE NAME :'                                                 
+     A  22        FILENAM       10A  O  5 16                                                                
+     A  22                                  COLOR(RED)                                                      
+     A  22                              5 30'    LIBRARY :'                                                 
+     A  22        LIBRARY       10A  O  5 44                                                                
+     A  22                                  COLOR(RED)                                                      
+     A  22        FLDCURC        7A  O  5 73                                                                
+     A  22                                  COLOR(RED)                                                      
+     A  22                              6  2'      FIELD :'                                                 
+     A  22        FLDNAM        10A  O  6 16                                                                
+     A  22                                  COLOR(RED)                                                      
+     A  22                              6 30'DESCRIPTION :'                                                 
+     A  22        FLDDSC        30A  O  6 44                                                                
+     A  22                                  COLOR(RED)                                                      
+     A  22                              7  2'       TYPE :'                                                 
+     A  22        FLDTYP        11A  O  7 16                                                                
+     A  22                                  COLOR(RED)                                                      
+     A  22                              7 30'     LENGTH :'                                                 
+     A  22        FLDLEN         5A  O  7 44                                                                
+     A  22                                  COLOR(RED)                                                      
+     A  22                              7 59'    DECIMAL :'                                                 
+     A  22        FLDDEC         5A  O  7 73                                                                
+     A  22                                  COLOR(RED)                                                      
+     A  22                              4  2'-----------------------------------                            
+     A                                      ------------------------------------                            
+     A                                      ---------'                                                      
+     A  22                              8  2'-----------------------------------                            
+     A                                      ------------------------------------                            
+     A                                      ---------'                                                      
+     ‚*---------------------------------------------------------------------*                               
+     A          R GETFIL                                                                                    
+     ‚*---------------------------------------------------------------------*                               
+     A                                      OVERLAY                                                         
+     A                                  9  2'FILE NAME :'                                                   
+     A            FILENAM       10   B  9 14                                                                
+     A                                      DSPATR(UL)                                                      
+     A                                  9 41'PGM PREFIX :'                                                  
+     A            INPGMPRFX      8   O  9 54                                                                
+     A                                 10  2'  LIBRARY :'                                                   
+     A            LIBRARY       10   B 10 14                                                                
+     A                                      DSPATR(UL)                                                      
+     A                                 12  2'PROJECT ..........:'                                           
+     A            SPROJNM       16   B 12 22                                                                
+     A                                      DSPATR(UL)                                                      
+     A                                      CHECK(LC)                                                       
+     A                                 12 41'PROJECT CODE .....:'                                           
+     A            SPROJCD       16   B 12 61                                                                
+     A                                      DSPATR(UL)                                                      
+     A                                      CHECK(LC)                                                       
+     A                                 13  2'AUTHOR ...........:'                                           
+     A            SAUTH         16   B 13 22                                                                
+     A                                      DSPATR(UL)                                                      
+     A                                      CHECK(LC)                                                       
+     A                                 13 41'DATE .............:'                                           
+     A            SDATE         10   B 13 61                                                                
+     A                                      DSPATR(UL)                                                      
+     A                                 14  2'DESCRIPTION ......:'                                           
+     A            SDESC         48   B 14 22                                                                
+     A                                      DSPATR(UL)                                                      
+     A                                      CHECK(LC)                                                       
+     A                                 15  2'SCREEN NAME ......:'                                           
+     A            SSCRN         50   B 15 22                                                                
+     A                                      DSPATR(UL)                                                      
+     A                                      CHECK(LC)                                                       
+     A*                                     DSPATR(UL) CNTFLD(15)                                           
+     ‚*---------------------------------------------------------------------*                               
+     A          R GETFLD                                                                                    
+     ‚*---------------------------------------------------------------------*                               
+     A                                      OVERLAY                                                         
+     A                                  9  2'OPTIONS'                                                       
+     A                                      COLOR(WHT)                                                      
+     A                                 10  2'EDITABLE FIELD ...:'                                           
+     A            FLDSCR         1A  O 10 22                                                                
+     A                                 10 41'ADD/EDIT SCR TEXT :'                                           
+     A            FLDAET        15A  B 10 61DSPATR(UL)                                                      
+     A                                      CHECK(LC)                                                       
+     A*N31                                  DSPATR(PR)                                                      
+     A*                                11  2'KEY FIELD ........:'                                           
+     A*           FLDKEY         1A  B 11 22DSPATR(UL)                                                      
+     A*N31                                  DSPATR(PR)                                                      
+     A*                                11 41'DEFAULT VALUE ....:'                                           
+     A*           FLDDFT        16A  B 11 61DSPATR(UL)                                                      
+     A                                 12  2'DISPLAY IN SBFILE :'                                           
+     A            FLDSUB         1A  B 12 22DSPATR(UL)                                                      
+     A                                 12 41'SUBFILE SCR TEXT .:'                                           
+     A            FLDSFT        16A  B 12 61DSPATR(UL)                                                      
+     A                                      CHECK(LC)                                                       
+     A                                 14  2'USE IN POSITION ..:'                                           
+     A            FLDUPS         1A  B 14 22DSPATR(UL)                                                      
+     A  61                                  DSPATR(PR)                                                      
+     A*                                14  2'COMING SOON...'                                                
+     A*                                     COLOR(WHT)                                                      
+     A*                                15  2'VALIDATION REQ ...:'                                           
+     A*           FLDVAL         1A  B 15 22DSPATR(UL)                                                      
+     A*N31                                  DSPATR(PR)                                                      
+     A*                                16  2'MINIMUM VALUE ....:'                                           
+     A*           FLDMIN        16A  B 16 22DSPATR(UL)                                                      
+     A*N31                                  DSPATR(PR)                                                      
+     A*                                16 41'MAXIMUM VALUE ....:'                                           
+     A*           FLDMAX        16A  B 16 61DSPATR(UL)                                                      
+     A*N31                                  DSPATR(PR)                                                      
+     A*                                18  2'VALID VALUE 1 ....:'                                           
+     A*           FLDVA1        16A  B 18 22DSPATR(UL)                                                      
+     A*N31                                  DSPATR(PR)                                                      
+     A*                                18 41'VALID VALUE 2 ....:'                                           
+     A*           FLDVA2        16A  B 18 61DSPATR(UL)                                                      
+     A*N31                                  DSPATR(PR)                                                      
+     A*                                20  2'VALID VALUE 3 ....:'                                           
+     A*           FLDVA3        16A  B 20 22DSPATR(UL)                                                      
+     A*N31                                  DSPATR(PR)                                                      
+     A*                                20 41'VALID VALUE 4 ....:'                                           
+     A*           FLDVA4        16A  B 20 61DSPATR(UL)                                                      
+     A*N31                                  DSPATR(PR)                                                      
+     A            FLDKEY         1A  H                                                                      
+     A            FLDDFT        16A  H                                                                      
+     A            FLDVAL         1A  H                                                                      
+     A            FLDMIN        16A  H                                                                      
+     A            FLDMAX        16A  H                                                                      
+     A            FLDVA1        16A  H                                                                      
+     A            FLDVA2        16A  H                                                                      
+     A            FLDVA3        16A  H                                                                      
+     A            FLDVA4        16A  H                                                                      
+     ‚*---------------------------------------------------------------------*                               
+     A          R FOOTER                                                                                    
+     ‚*---------------------------------------------------------------------*                               
+     A                                      OVERLAY                                                         
+     A                                 22  2'F3=EXIT'                                                       
+     A                                      COLOR(BLU)                                                      
+     A                                 22 11'F5=REFRESH'                                                    
+     A                                      COLOR(BLU)                                                      
+     A                                 22 23'F12=CANCEL'                                                    
+     A                                      COLOR(BLU)                                                      
+     A                                 22 34'F18=CONTINUE'                                                  
+     A                                      COLOR(BLU)                                                      
+     A            ERRMSG        70A  O 23  2COLOR(WHT)                                                      
+     ‚**********************************************************************                                
