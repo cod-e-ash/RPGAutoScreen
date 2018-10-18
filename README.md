@@ -23,23 +23,23 @@ CRTLIB RPGUTILS
 ### Program and Object Descriptions  
   
   * AUTOSCRAF.pf  
-  ...This is a PF source which will hold the data to generate programs and screens. 
-  ...Create four files based on this source AUTOSCRAF1, AUTOSCRAF2, AUTOSCRAF3, AUTOSCRAF4
+  This is a PF source which will hold the data to generate programs and screens.  
+  Create four files based on this source AUTOSCRAF1, AUTOSCRAF2, AUTOSCRAF3, AUTOSCRAF4  
 
   * AUTOSCRAF1/2/3/4.pfd  
-  ...This contain the data to be inserted into source files created before. (Use name as reference)
+  This contain the data to be inserted into source files created before. (Use name as reference)  
 
   * AUTOSCRC.cl  
-  ...This is a dirver CL program. 
+  This is a dirver CL program.  
 
   * AUTOSCRC.cd  
-  ...Command file. Use this source to create the command, use any name, but make sure you are calling the above CL as program.
+  Command file. Use this source to create the command, use any name, but make sure you are calling the above CL as program.  
 
   * AUTOSCRP.rpg  
-  ...Main program that contains all the logic. 
+  Main program that contains all the logic.  
 
   * CPYBK.cpb  
-  ...A copybook to store prototype definations and other. If you use any other library that RPGUTILS, please change the path in above RPG program for this copy book.
+  A copybook to store prototype definations and other. If you use any other library that RPGUTILS, please change the path in above RPG program for this copy book.  
 
 
 ### Installing
