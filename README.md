@@ -45,7 +45,7 @@ CRTSRCPF RPGUTILS
 ### Installing
 
 **Step 1.**
-Upload all files to AS400 server, use ftp.
+Upload all files to AS400 server, use ftp. <em>DO NOT CHANGE THE MODE TO BINARY</em>.
 ```
   open pub400.com
   username
