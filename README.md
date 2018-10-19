@@ -22,23 +22,23 @@ CRTSRCPF RPGUTILS
 
 ### Program and Object Descriptions  
   
-  * AUTOSCRAF.pf  
+  * `AUTOSCRAF`  
   This is a PF source which will hold the data to generate programs and screens.  
   Create four files based on this source AUTOSCRAF1, AUTOSCRAF2, AUTOSCRAF3, AUTOSCRAF4  
 
-  * AUTOSCRAF1/2/3/4.pfd  
+  * `AUTOSCRAF1/2/3/4`  
   This contain the data to be inserted into source files created before. (Use name as reference)  
 
-  * AUTOSCRC.cl  
+  * `AUTOSCRC`  
   This is a dirver CL program.  
 
-  * AUTOSCRC.cd  
+  * `AUTOSCRC`  
   Command file. Use this source to create the command, use any name, but make sure you are calling the above CL as program.  
 
-  * AUTOSCRP.rpg  
+  * `AUTOSCRP`  
   Main program that contains all the logic.  
 
-  * CPYBK.cpb  
+  * `CPYBK`  
   A copybook to store prototype definations and other. If you use any other library that RPGUTILS, please change the path in above RPG program for this copy book.  
 
 
@@ -106,7 +106,7 @@ Your library needs to be added to library list. Use below code.
 Call Program with a prefix and optional library.  
 If library specified, it will be used to create the pg and dspf source files.  
 Prefix if used to name the programs and display files.  
-E.g. if prefix is FIRST, then the display files would be **FIRSTMD , FIRSTSD** and pgms would be **FIRSTMP, FIRSTSP**.  
+E.g. if prefix is FIRST, then the display files would be `FIRSTMD, FIRSTSD` and pgms would be `FIRSTMP, FIRSTSP`.  
 ```
   AUTOSCRC PGMPRFX(FIRST) LIBL(YOURLIB)  
 ```
@@ -117,8 +117,6 @@ Also some optional additional information like Description, Author, Date etc.
 The next thing it will ask is about fields to be present in subfile and if you want to have any positions.
 Alteast one field needs to be present in your subfile display.
 
-**__Done.__**
-
 Program will comiple the display files and program automatically.
 You can then check by calling as below
 ```
@@ -126,7 +124,7 @@ You can then check by calling as below
 ```
 
 ## Troubleshooting
-Check YOURLIB/AUTOSCRF file where the source will be generated for any errors/modifications.
+Check `YOURLIB/AUTOSCRF` file where the source will be generated for any errors/modifications.
 
 ## Authors
 
@@ -137,4 +135,4 @@ Ashish Bagaddeo
 This project is licensed under the Apache License v2.0 - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-Thanks [www.PUB400.com]PUB400.com for public server.
+Thanks [www.PUB400.com] for public server.
