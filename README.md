@@ -15,9 +15,9 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 You need to have AS400 Machine access (duh!)  
-Create a RPGUtils library to store the files.
+Create a RPGUtils Source File to store the files.
 ```
-CRTLIB RPGUTILS
+CRTSRCPF RPGUTILS
 ```
 
 ### Program and Object Descriptions  
@@ -50,65 +50,83 @@ Upload all files to AS400 server, use ftp.
   open pub400.com
   username
   password
-  cd /qsys.lib	
-  cd RPGUTILS.LIB 				
-  cd 	iCORESRC.FILE
-  mput *.rpg
+  cd /QSYS.LIB
+  cd YOURLIB.LIB
+  cd RPGUTILS.FILE
+  mput *.MBR
+  cd /home/YOURLIB/
+  mput *.txt
   disconnect
   quit
 ```
 **Step 2.**
-Compile Objects according to their extensions and change the atribute type accordingly once uploaded.
-Below are the file extensions as per their format:  
+Change the atribute type accordingly once uploaded.
 ```
-  .rpg  -> RPGLE/SQLRPGLE (RPG Program)  
-  .cl   -> CLLE (CL Program)  
-  .cd   -> CMD (Command File)  (Use the command source, but name the command at your choice)
-  .pf   -> PF (PF Source)  (Create 4 files based on this pf, AUTOSCRAF1, AUTOSCRAF2, AUTOSCRAF3, AUTOSCRAF4
-  .dspf -> DSPF (Display File)  
-  
-  (leave these, should not be compiled)
-  .cpb  -> CPY (Copybook)  
-  .pfd  -> PF Data (Data to be added to given file)  
+  AUTOSCRAF   PF      
+  AUTOSCRC    CLLE    
+  AUTOSCRCC   CMD     
+  AUTOSCRD    DSPF    
+  AUTOSCRP    SQLRPGLE
+  CPYBK       CPY       
 ```
-**Step 3.** 
-Copy the data from the .pfd files to AUTOSCRAF1, AUTOSCRAF2, AUTOSCRAF3 and AUTOSCRAF4
+**Step3.**
+Use below command to compile.
+```
+CRTPF FILE(YOURLIB/AUTOSCRAF1) SRCFILE(YOURLIB/RPGUTILS) SRCMBR(AUTOSCRAF) 
+CRTPF FILE(YOURLIB/AUTOSCRAF2) SRCFILE(YOURLIB/RPGUTILS) SRCMBR(AUTOSCRAF) 
+CRTPF FILE(YOURLIB/AUTOSCRAF3) SRCFILE(YOURLIB/RPGUTILS) SRCMBR(AUTOSCRAF) 
+CRTPF FILE(YOURLIB/AUTOSCRAF4) SRCFILE(YOURLIB/RPGUTILS) SRCMBR(AUTOSCRAF) 
 
-**Step 4.**
-Use below steps to test.
+CRTBNDCL PGM(YOURLIB/AUTOSCRC) SRCFILE(YOURLIB/RPGUTILS) SRCMBR(AUTOSCRC) REPLACE(*YES) 
+
+CRTCMD CMD(YOURLIB/AUTOSCRC) PGM(*LIBL/AUTOSCRCC) SRCFILE(YOURLIB/RPGUTILS) SRCMBR(AUTOSCRCC) REPLACE(*YES) 
+
+CRTDSPF FILE(YOURLIB/AUTOSCRD) SRCFILE(YOURLIB/RPGUTILS) SRCMBR(AUTOSCRD) REPLACE(*YES)              
+
+CRTSQLRPGI OBJ(YOURLIB/AUTOSCRP) SRCFILE(YOURLIB/RPGUTILS) SRCMBR(AUTOSCRP) COMMIT(*NONE) OBJTYPE(*PGM) REPLACE(*NO)               
+
+```
+
+**Step 4.** 
+Copy the data from the .txt files to AUTOSCRAF1/2/3/4
+```
+CPYFRMIMPF FROMSTMF('/home/YOURLIB/AUTOSCRAF1.txt') TOFILE(AUTOSCRAF1) MBROPT(*REPLACE) RCDDLM(*CRLF) RMVBLANK(*NONE)
+CPYFRMIMPF FROMSTMF('/home/YOURLIB/AUTOSCRAF2.txt') TOFILE(AUTOSCRAF2) MBROPT(*REPLACE) RCDDLM(*CRLF) RMVBLANK(*NONE)
+CPYFRMIMPF FROMSTMF('/home/YOURLIB/AUTOSCRAF3.txt') TOFILE(AUTOSCRAF3) MBROPT(*REPLACE) RCDDLM(*CRLF) RMVBLANK(*NONE)
+CPYFRMIMPF FROMSTMF('/home/YOURLIB/AUTOSCRAF4.txt') TOFILE(AUTOSCRAF4) MBROPT(*REPLACE) RCDDLM(*CRLF) RMVBLANK(*NONE)
+```
 
 
-## Running the tests
+## Running
 
 Your library needs to be added to library list. Use below code.
 ```
-  ADDLIBLE RPGUTILS
+  ADDLIBLE YOURLIB
  ```
- 
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
+Call Program with a prefix and optional library.  
+If library specified, it will be used to create the pg and dspf source files.  
+Prefix if used to name the programs and display files.  
+E.g. if prefix is FIRST, then the display files would be **FIRSTMD , FIRSTSD** and pgms would be **FIRSTMP, FIRSTSP**.  
 ```
-Give an example
+  AUTOSCRC PGMPRFX(FIRST) LIBL(YOURLIB)  
 ```
 
-### And coding style tests
+You will need to provide information like file (for which the screen is to be generated), library where file is present.  
+Also some optional additional information like Description, Author, Date etc.  
 
-Explain what these tests test and why
+The next thing it will ask is about fields to be present in subfile and if you want to have any positions.
+Alteast one field needs to be present in your subfile display.
 
+**__Done.__**
+
+Program will comiple the display files and program automatically.
+You can then check by calling as below
 ```
-Give an example
+  CALL FIRSTSP
 ```
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-
-## Contributing
-
+## Troubleshooting
+Check YOURLIB/AUTOSCRF file where the source will be generated for any errors/modifications.
 
 ## Authors
 
@@ -119,4 +137,4 @@ Ashish Bagaddeo
 This project is licensed under the Apache License v2.0 - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-
+Thanks [www.PUB400.com]PUB400.com for public server.
