@@ -1,6 +1,6 @@
 # RPG Auto Screen Generator
 
-This is part of my `RPG Utils` series to help overcome some of the day-to-day activities which can be automated.
+This is part of my **`RPG Utils`** series to help overcome some of the day-to-day activities which can be automated.
 Those are starting with developemnt, I would advice not to use this utility, but to build their own code. For he rest, here's a simple soultion that will save you and your company lots of time. This utility will develop the subfile screens, maintainance screens and all the logic behind the program within few minutes. 
 
 ## Getting Started
