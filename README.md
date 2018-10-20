@@ -1,7 +1,7 @@
 # RPG Auto Screen Generator
 
 This is part of my **`RPG Utils`** series to help overcome some of the day-to-day activities which can be automated.
-Those are starting with developemnt, I would advice not to use this utility, but to build their own code. For he rest, here's a simple soultion that will save you and your company lots of time. This utility will develop the subfile screens, maintainance screens and all the logic behind the program within few minutes. 
+Those are starting with development, I would advise not to use this utility, but to build their own code. For the rest, here's a simple solution that will save you and your company lots of time. This utility will develop the subfile screens, maintenance screens and all the logic behind the program within few minutes. 
 
 ## Getting Started
 
@@ -25,7 +25,7 @@ CRTSRCPF RPGUTILS
   This contain the data to be inserted into source files created before. (Use name as reference)  
 
   * `AUTOSCRC`  
-  This is a dirver CL program.  
+  This is a driver CL program.  
 
   * `AUTOSCRC`  
   Command file. Use this source to create the command, use any name, but make sure you are calling the above CL as program.  
@@ -34,7 +34,7 @@ CRTSRCPF RPGUTILS
   Main program that contains all the logic.  
 
   * `CPYBK`  
-  A copybook to store prototype definations and other. If you use any other library that RPGUTILS, please change the path in above RPG program for this copy book.  
+  A copybook to store prototype definitions and other. If you use any other library that RPGUTILS, please change the path in above RPG program for this copy book.  
 
 
 ### Installing
@@ -55,7 +55,7 @@ Upload all files to AS400 server, use ftp. <em>DO NOT CHANGE THE MODE TO BINARY<
   quit
 ```
 **Step 2.**
-Change the atribute type accordingly once uploaded.
+Change the attribute type accordingly once uploaded.
 ```
   AUTOSCRAF   PF      
   AUTOSCRC    CLLE    
@@ -99,20 +99,20 @@ Your library needs to be added to library list. Use below code.
   ADDLIBLE YOURLIB
  ```
 Call Program with a prefix and optional library.  
-If library specified, it will be used to create the pg and dspf source files.  
+If library specified, it will be used to create the program and display source files.  
 Prefix if used to name the programs and display files.  
-E.g. if prefix is FIRST, then the display files would be `FIRSTMD, FIRSTSD` and pgms would be `FIRSTMP, FIRSTSP`.  
+E.g. if prefix is FIRST, then the display files would be `FIRSTMD, FIRSTSD` and programs would be `FIRSTMP, FIRSTSP`.  
 ```
   AUTOSCRC PGMPRFX(FIRST) LIBL(YOURLIB)  
 ```
 
 You will need to provide information like file (for which the screen is to be generated), library where file is present.  
-Also some optional additional information like Description, Author, Date etc.  
+Some optional additional information like Description, Author, Date etc.  
 
 The next thing it will ask is about fields to be present in subfile and if you want to have any positions.
-Alteast one field needs to be present in your subfile display.
+At least one field needs to be present in your subfile display.
 
-Program will comiple the display files and program automatically.
+Program will compile the display files and program automatically.
 You can then check by calling as below
 ```
   CALL FIRSTSP
