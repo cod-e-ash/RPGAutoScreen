@@ -130,4 +130,4 @@ Ashish Bagaddeo
 This project is licensed under the Apache License v2.0 - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-Thanks [www.PUB400.com](www.pub400.com) for public server.
+Thanks www.PUB400.com for hosting a public server.
