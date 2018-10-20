@@ -1,16 +1,11 @@
 # RPG Auto Screen Generator
 
-This is part of my RPG Utils series to help overcome some of the day-to-day activities which can be automated.
-During my previous assignments with various companies, I found that there are many static files thats get created during any project.
-Initial data is added via SQL or any other method. But the problem arises when we have to modify the data. Now, usually the static files are not maintained by the developer, but by any other team. Now options to them are either SQL or UPDDTA or any other third party tool which in many cases, are error prone.
-
-Imagine you are have a static file with 20, 40, 60 fields. Now developing program for maintainance of this file would take much of your project work time. That is not how we (coders) do the things.
-
-So i present to you a utility that can generate subfiles, programs and all the logic behind the scene withing few mins. Isn't that awesome. 
+This is part of my `RPG Utils` series to help overcome some of the day-to-day activities which can be automated.
+Those are starting with developemnt, I would advice not to use this utility, but to build their own code. For he rest, here's a simple soultion that will save you and your company lots of time. This utility will develop the subfile screens, maintainance screens and all the logic behind the program within few minutes. 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
@@ -135,4 +130,4 @@ Ashish Bagaddeo
 This project is licensed under the Apache License v2.0 - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-Thanks [www.PUB400.com] for public server.
+Thanks [www.PUB400.com](www.pub400.com) for public server.
